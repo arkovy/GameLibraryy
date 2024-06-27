@@ -7,11 +7,10 @@ class GameCreate(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = ('name', 'genre', 'developer', 'author', 'difficulty', 'image')
+        fields = ('name', 'genre', 'developer', 'difficulty', 'image')
 
-    def save(self, user, commit=True):
+    def save(self, user=None, commit=True):
         post = super(GameCreate, self).save(commit=False)
-        post.author = user
         post.save()
 
         self.save_m2m()

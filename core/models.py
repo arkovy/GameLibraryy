@@ -11,7 +11,7 @@ class TimeAbstractModel(models.Model):
         abstract = True
 
 
-def image_upload_to( filename):
+def image_upload_to(instance, filename):
     return f'images/{filename}'
 
 
@@ -29,8 +29,7 @@ class Post(TimeAbstractModel):
     name = models.CharField(max_length=100)
     genre = models.CharField(max_length=100)
     developer = models.CharField(max_length=100)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
-    tags = models.ManyToManyField('Tag')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     image = models.ImageField(upload_to=image_upload_to, blank=True, null=True)
     difficulty = models.PositiveSmallIntegerField(choices=PEGI_CHOICES)
 
@@ -47,10 +46,3 @@ class Post(TimeAbstractModel):
     def delete(self, using=None, keep_parents=False):
 
         return super(Post, self).delete(using, keep_parents)
-
-
-class Tag(models.Model):
-    name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.name

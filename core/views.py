@@ -1,23 +1,18 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView, CreateView, DeleteView
+from django.views.generic import CreateView, DeleteView, ListView
 
 from core.forms import GameCreate
 from core.models import Post
 
 
-def post_list_view(request):
-    posts = Post.objects.all()
-    return render(request,  template_name='game_list.html', context={'posts': posts})
-
-
-class IndexView(TemplateView):
+class IndexView(ListView):
     template_name = 'game_list.html'
-    form_class = Post
-    success_url = '/'
+    model = Post
+    context_object_name = 'posts'
 
     def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
-        context['posts'] = Post.objects.filter().select_related('author').prefetch_related('tags')
+        context = super().get_context_data(**kwargs)
+        context['posts'] = Post.objects.select_related('author').all()
 
         return context
 

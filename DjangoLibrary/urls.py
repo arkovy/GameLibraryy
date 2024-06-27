@@ -18,13 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
 
-from core.views import IndexView, post_list_view, GameCreateView, PostDeleteView
+from core.views import IndexView, GameCreateView, PostDeleteView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', IndexView.as_view()),
-    path('posts-list/', post_list_view),
-    path('game-delete/<int:pk>/', PostDeleteView.as_view(), name='game_delete'),
+    path('', IndexView.as_view(), name='index'),
+    path('game-delete/<int:pk>/', PostDeleteView.as_view(), name='game-delete'),
     path('game-create/', GameCreateView.as_view()),
     path("__debug__/", include("debug_toolbar.urls")),
 ]

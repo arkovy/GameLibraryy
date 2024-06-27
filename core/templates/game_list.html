@@ -8,8 +8,9 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
-                <th>Author</th>
-                <th>Tags</th>
+                <th>Genre</th>
+                <th>Author game</th>
+                <th>Difficulty</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -18,11 +19,18 @@
                 <tr id="post-{{ post.id }}">
                     <td>{{ post.id }}</td>
                     <td>{{ post.name }}</td>
-                    <td>{{ post.author.username }}</td>
+                    <td>{{ post.genre }}</td>
+                    <td>{{ post.developer }}</td>
                     <td>
-                        {% for tag in post.tags.all %}
-                            {{ tag.name }}{% if not forloop.last %}, {% endif %}
-                        {% endfor %}
+                        {% if post.difficulty == post.PEGI_EASY %}
+                            Easy
+                        {% elif post.difficulty == post.PEGI_MEDIUM %}
+                            Medium
+                        {% elif post.difficulty == post.PEGI_HARD %}
+                            Hard
+                        {% else %}
+                            Unknown
+                        {% endif %}
                     </td>
                     <td>
                         <a href="{% url 'game-delete' post.id %}" class="btn btn-danger">Удалить</a>
