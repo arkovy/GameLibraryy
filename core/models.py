@@ -15,34 +15,26 @@ def image_upload_to(instance, filename):
     return f'images/{filename}'
 
 
-class Post(TimeAbstractModel):
+class Game(TimeAbstractModel):
 
-    PEGI_EASY = 1
-    PEGI_MEDIUM = 2
-    PEGI_HARD = 3
-    PEGI_CHOICES = (
-        (PEGI_EASY, 'Easy'),
-        (PEGI_MEDIUM, 'Medium'),
-        (PEGI_HARD, 'Hard')
+    DIFFICULTY_EASY = 1
+    DIFFICULTY_MEDIUM = 2
+    DIFFICULTY_HARD = 3
+    DIFFICULTY = (
+        (DIFFICULTY_EASY, 'Easy'),
+        (DIFFICULTY_MEDIUM, 'Medium'),
+        (DIFFICULTY_HARD, 'Hard')
     )
 
     name = models.CharField(max_length=100)
     genre = models.CharField(max_length=100)
     developer = models.CharField(max_length=100)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    image = models.ImageField(upload_to=image_upload_to, blank=True, null=True)
-    difficulty = models.PositiveSmallIntegerField(choices=PEGI_CHOICES)
+    icon = models.ImageField(upload_to=image_upload_to, blank=True, null=True)
+    difficulty = models.PositiveSmallIntegerField(choices=DIFFICULTY)
 
     def __str__(self):
         return self.name
 
-    def save(self, *args, **kwargs):
-        if self.pk:
-            print('update')
-        else:
-            print('create')
-        return super(Post, self).save(*args, **kwargs)
-
     def delete(self, using=None, keep_parents=False):
 
-        return super(Post, self).delete(using, keep_parents)
+        return super(Game, self).delete(using, keep_parents)

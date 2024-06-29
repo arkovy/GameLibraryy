@@ -1,17 +1,17 @@
 from django import forms
 
-from core.models import Post
+from core.models import Game
 
 
 class GameCreate(forms.ModelForm):
 
     class Meta:
-        model = Post
-        fields = ('name', 'genre', 'developer', 'difficulty', 'image')
+        model = Game
+        fields = ('name', 'genre', 'developer', 'difficulty', 'icon')
 
     def save(self, user=None, commit=True):
-        post = super(GameCreate, self).save(commit=False)
-        post.save()
+        game = super(GameCreate, self).save(commit=False)
+        game.save()
 
         self.save_m2m()
-        return post
+        return game

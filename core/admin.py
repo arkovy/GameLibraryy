@@ -1,5 +1,5 @@
 from django.contrib import admin
 
-from core.models import Post
+from core.models import Game
 
-admin.site.register(Post)
+admin.site.register(Game)

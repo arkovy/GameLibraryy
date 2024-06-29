@@ -1,18 +1,18 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.views.generic import CreateView, DeleteView, ListView
 
 from core.forms import GameCreate
-from core.models import Post
+from core.models import Game
 
 
 class IndexView(ListView):
     template_name = 'game_list.html'
-    model = Post
-    context_object_name = 'posts'
+    model = Game
+    context_object_name = 'games'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['posts'] = Post.objects.select_related('author').all()
+        context['games'] = Game.objects.all()
 
         return context
 
@@ -20,7 +20,7 @@ class IndexView(ListView):
 class GameCreateView(CreateView):
     template_name = 'game_create.html'
     form_class = GameCreate
-    success_url = '/game-create/'
+    success_url = '/'
 
     def form_valid(self, form):
         form.save(user=self.request.user)
@@ -32,7 +32,7 @@ class GameCreateView(CreateView):
         }
 
 
-class PostDeleteView(DeleteView):
+class GameDeleteView(DeleteView):
     template_name = 'game_delete.html'
-    model = Post
+    model = Game
     success_url = '/'
