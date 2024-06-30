@@ -34,7 +34,3 @@ class Game(TimeAbstractModel):
 
     def __str__(self):
         return self.name
-
-    def delete(self, using=None, keep_parents=False):
-
-        return super(Game, self).delete(using, keep_parents)

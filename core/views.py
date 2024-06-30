@@ -10,26 +10,11 @@ class IndexView(ListView):
     model = Game
     context_object_name = 'games'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['games'] = Game.objects.all()
-
-        return context
-
 
 class GameCreateView(CreateView):
     template_name = 'game_create.html'
     form_class = GameCreate
     success_url = '/'
-
-    def form_valid(self, form):
-        form.save(user=self.request.user)
-        return redirect(self.success_url)
-
-    def get_initial(self):
-        return {
-            'title': 'Введите назване игры',
-        }
 
 
 class GameDeleteView(DeleteView):
