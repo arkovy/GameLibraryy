@@ -12,6 +12,9 @@
                 <th>Developer</th>
                 <th>Difficulty</th>
                 <th>Actions</th>
+                 <td>
+                    <a href="{% url 'game-create' %}" class="btn btn-success">Добавить игру</a>
+                </td>
             </tr>
         </thead>
         <tbody>
@@ -32,7 +35,6 @@
                     <td>{{ game.get_difficulty_display }}</td>
                     <td>
                         <a href="{% url 'game-delete' game.id %}" class="btn btn-danger">Удалить</a>
-                        <a href="{% url 'game-create' %}" class="btn btn-success">Добавить игру</a>
                     </td>
                 </tr>
             {% endfor %}
