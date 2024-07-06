@@ -2,16 +2,12 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-    <h1>Games</h1>
+    <h1>Games List</h1>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Icon</th>
                 <th>Name</th>
-                <th>Genre</th>
                 <th>Developer</th>
-                <th>Difficulty</th>
-                <th>Actions</th>
                  <td>
                     <a href="{% url 'game-create' %}" class="btn btn-success">Добавить игру</a>
                 </td>
@@ -20,21 +16,10 @@
         <tbody>
             {% for game in games %}
                 <tr>
-                    <td>
-                          {% if game.icon %}
-                            <a href="{{ game.icon.url }}" target="_blank">
-                                <img src="{{ game.icon.url }}" alt="{{ game.name }}" style="max-width: 100px; height: auto;">
-                            </a>
-                        {% else %}
-                            No Icon
-                        {% endif %}
-                    </td>
                     <td>{{ game.name }}</td>
-                    <td>{{ game.genre }}</td>
                     <td>{{ game.developer }}</td>
-                    <td>{{ game.get_difficulty_display }}</td>
                     <td>
-                        <a href="{% url 'game-delete' game.id %}" class="btn btn-danger">Удалить</a>
+                        <a href="{% url 'game-info' game.id %}" class="btn btn-danger">Посмотреть игру</a>
                     </td>
                 </tr>
             {% endfor %}

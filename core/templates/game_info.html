@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+    <h1>Game Info</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Icon</th>
+                <th>Name</th>
+                <th>Genre</th>
+                <th>Developer</th>
+                <th>Difficulty</th>
+                <th>Actions</th>
+                <td>
+                    <a href="{% url 'index' %}" class="btn btn-success">Вернуться назад</a>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    {% if game.icon %}
+                        <a href="{{ game.icon.url }}" target="_blank">
+                            <img src="{{ game.icon.url }}" alt="{{ game.name }}" style="max-width: 100px; height: auto;">
+                        </a>
+                    {% else %}
+                        No Icon
+                    {% endif %}
+                </td>
+                <td>{{ game.name }}</td>
+                <td>{{ game.genre }}</td>
+                <td>{{ game.developer }}</td>
+                <td>{{ game.get_difficulty_display }}</td>
+                <td>
+                    <a href="{% url 'game-delete' game.id %}" class="btn btn-danger">Удалить</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock content %}
