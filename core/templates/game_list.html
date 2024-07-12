@@ -3,11 +3,23 @@
 
 {% block content %}
     <h1>Games List</h1>
+    <form method="get">
+        <div class="form-group">
+            <label for="sort_by">Сортировать по:</label>
+            <select id="sort_by" name="sort_by" class="form-control">
+                <option value="name" {% if request.GET.sort_by == 'name' %}selected{% endif %}>Имя</option>
+                <option value="difficulty" {% if request.GET.sort_by == 'difficulty' %}selected{% endif %}>Сложность</option>
+                <option value="genre" {% if request.GET.sort_by == 'genre' %}selected{% endif %}>Жанр</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Применить</button>
+    </form>
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Developer</th>
+                <th>Difficulty</th>
+                <th>Genre</th>
                  <td>
                     <a href="{% url 'game-create' %}" class="btn btn-success">Добавить игру</a>
                 </td>
@@ -17,7 +29,8 @@
             {% for game in games %}
                 <tr>
                     <td>{{ game.name }}</td>
-                    <td>{{ game.developer }}</td>
+                    <td>{{ game.get_difficulty_display }}</td>
+                    <td>{{ game.genre }}</td>
                     <td>
                         <a href="{% url 'game-info' game.id %}" class="btn btn-danger">Посмотреть игру</a>
                     </td>
