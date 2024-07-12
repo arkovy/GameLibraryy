@@ -1,4 +1,4 @@
-from django.views.generic import CreateView, DeleteView, ListView
+from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from core.forms import GameCreate
 from core.models import Game
@@ -26,5 +26,12 @@ class GameView(DeleteView):
     template_name = 'game_info.html'
     model = Game
     context_object_name = 'game'
+
+
+class GameEditView(UpdateView):
+    template_name = 'game_edit.html'
+    model = Game
+    fields = ('name', 'genre', 'developer', 'difficulty', 'icon')
+    success_url = '/'
 
 
