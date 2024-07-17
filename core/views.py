@@ -1,4 +1,3 @@
-from django.shortcuts import redirect
 from django.views.generic import CreateView, DeleteView, ListView
 
 from core.forms import GameCreate
@@ -21,3 +20,11 @@ class GameDeleteView(DeleteView):
     template_name = 'game_delete.html'
     model = Game
     success_url = '/'
+
+
+class GameView(DeleteView):
+    template_name = 'game_info.html'
+    model = Game
+    context_object_name = 'game'
+
+

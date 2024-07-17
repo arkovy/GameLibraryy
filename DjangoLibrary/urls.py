@@ -20,12 +20,13 @@ from django.urls import path
 from django.urls.conf import include
 
 from django.conf import settings
-from core.views import IndexView, GameCreateView, GameDeleteView
+from core.views import IndexView, GameCreateView, GameDeleteView, GameView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', IndexView.as_view(), name='index'),
     path('game-delete/<int:pk>/', GameDeleteView.as_view(), name='game-delete'),
     path('game-create/', GameCreateView.as_view(), name="game-create"),
+    path('game-info/<int:pk>/', GameView.as_view(), name="game-info"),
     path("__debug__/", include("debug_toolbar.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
