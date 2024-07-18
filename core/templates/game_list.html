@@ -3,13 +3,20 @@
 
 {% block content %}
     <h1>Games List</h1>
-    <form method="get">
+   <form method="get">
         <div class="form-group">
             <label for="sort_by">Сортировать по:</label>
             <select id="sort_by" name="sort_by" class="form-control">
                 <option value="name" {% if request.GET.sort_by == 'name' %}selected{% endif %}>Имя</option>
                 <option value="difficulty" {% if request.GET.sort_by == 'difficulty' %}selected{% endif %}>Сложность</option>
                 <option value="genre" {% if request.GET.sort_by == 'genre' %}selected{% endif %}>Жанр</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="sort_order">Порядок сортировки:</label>
+            <select id="sort_order" name="sort_order" class="form-control">
+                <option value="asc" {% if request.GET.sort_order == 'asc' %}selected{% endif %}>Возрастание</option>
+                <option value="desc" {% if request.GET.sort_order == 'desc' %}selected{% endif %}>Убывание</option>
             </select>
         </div>
         <button type="submit" class="btn btn-primary mt-2">Применить</button>

@@ -11,6 +11,9 @@ class IndexView(ListView):
 
     def get_queryset(self):
         sort_by = self.request.GET.get('sort_by', 'name')
+        sort_order = self.request.GET.get('sort_order', 'asc')
+        if sort_order == 'desc':
+            sort_by = '-' + sort_by
         return Game.objects.all().order_by(sort_by)
 
 
