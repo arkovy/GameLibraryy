@@ -1,3 +1,4 @@
+from django.urls import reverse
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 
 from core.forms import GameCreate
@@ -32,6 +33,8 @@ class GameEditView(UpdateView):
     template_name = 'game_edit.html'
     model = Game
     fields = ('name', 'genre', 'developer', 'difficulty', 'icon')
-    success_url = '/'
+
+    def get_success_url(self):
+        return reverse('game-info', kwargs={'pk': self.object.pk})
 
 
