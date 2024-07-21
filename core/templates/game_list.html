@@ -2,32 +2,50 @@
 {% load django_bootstrap5 %}
 
 {% block content %}
-    <h1>Games List</h1>
-   <form method="get">
-        <div class="form-group">
-            <label for="sort_by">Сортировать по:</label>
-            <select id="sort_by" name="sort_by" class="form-control">
-                <option value="name" {% if request.GET.sort_by == 'name' %}selected{% endif %}>Имя</option>
-                <option value="difficulty" {% if request.GET.sort_by == 'difficulty' %}selected{% endif %}>Сложность</option>
-                <option value="genre" {% if request.GET.sort_by == 'genre' %}selected{% endif %}>Жанр</option>
-            </select>
+    <h1>Список игр</h1>
+    <form method="get">
+        <div class="d-flex align-items-center">
+            <div class="form-group mr-3">
+                <label for="search_name">Имя:</label>
+                <input type="text" id="search_name" name="search_name" class="form-control" placeholder="Имя" value="{{ request.GET.search_name }}">
+            </div>
+            <div class="form-group mr-3">
+                <label for="search_genre">Жанр:</label>
+                <input type="text" id="search_genre" name="search_genre" class="form-control" placeholder="Жанр" value="{{ request.GET.search_genre }}">
+            </div>
+            <div class="form-group mr-3">
+                <label for="search_difficulty">Сложность:</label>
+                <input type="text" id="search_difficulty" name="search_difficulty" class="form-control" placeholder="Сложность" value="{{ request.GET.search_difficulty }}">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="sort_order">Порядок сортировки:</label>
-            <select id="sort_order" name="sort_order" class="form-control">
-                <option value="asc" {% if request.GET.sort_order == 'asc' %}selected{% endif %}>Возрастание</option>
-                <option value="desc" {% if request.GET.sort_order == 'desc' %}selected{% endif %}>Убывание</option>
-            </select>
+        <div class="form-row align-items-center">
+            <div class="col-auto">
+                <label for="sort_by">Сортировать по:</label>
+                <select id="sort_by" name="sort_by" class="form-control mb-2">
+                    <option value="name" {% if request.GET.sort_by == 'name' %}selected{% endif %}>Имя</option>
+                    <option value="difficulty" {% if request.GET.sort_by == 'difficulty' %}selected{% endif %}>Сложность</option>
+                    <option value="genre" {% if request.GET.sort_by == 'genre' %}selected{% endif %}>Жанр</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <label for="sort_order">Порядок сортировки:</label>
+                <select id="sort_order" name="sort_order" class="form-control mb-2">
+                    <option value="asc" {% if request.GET.sort_order == 'asc' %}selected{% endif %}>Возрастание</option>
+                    <option value="desc" {% if request.GET.sort_order == 'desc' %}selected{% endif %}>Убывание</option>
+                </select>
+            </div>
+            <div class="col-auto align-self-end">
+                <button type="submit" class="btn btn-primary mb-2">Применить</button>
+            </div>
         </div>
-        <button type="submit" class="btn btn-primary mt-2">Применить</button>
     </form>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Difficulty</th>
-                <th>Genre</th>
-                 <td>
+                <th>Имя</th>
+                <th>Сложность</th>
+                <th>Жанр</th>
+                <td>
                     <a href="{% url 'game-create' %}" class="btn btn-success">Добавить игру</a>
                 </td>
             </tr>
@@ -46,3 +64,7 @@
         </tbody>
     </table>
 {% endblock content %}
+
+
+
+
