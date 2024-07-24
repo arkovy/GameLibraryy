@@ -14,8 +14,13 @@
                 <input type="text" id="search_genre" name="search_genre" class="form-control" placeholder="Жанр" value="{{ request.GET.search_genre }}">
             </div>
             <div class="form-group mr-3">
-                <label for="search_difficulty">Сложность:</label>
-                <input type="text" id="search_difficulty" name="search_difficulty" class="form-control" placeholder="Сложность" value="{{ request.GET.search_difficulty }}">
+            <label for="search_difficulty">Сложность:</label>
+            <select id="search_difficulty" name="search_difficulty" class="form-control">
+                <option value="">Выберите сложность</option>
+                <option value="easy" {% if request.GET.search_difficulty == 'easy' %}selected{% endif %}>Легко</option>
+                <option value="medium" {% if request.GET.search_difficulty == 'medium' %}selected{% endif %}>Средне</option>
+                <option value="hard" {% if request.GET.search_difficulty == 'hard' %}selected{% endif %}>Сложно</option>
+                </select>
             </div>
         </div>
         <div class="form-row align-items-center">
