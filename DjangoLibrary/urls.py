@@ -20,7 +20,11 @@ from django.urls import path
 from django.urls.conf import include
 
 from django.conf import settings
+<<<<<<< HEAD
 from core.views import IndexView, GameCreateView, GameDeleteView, GameView, GameEditView
+=======
+from core.views import IndexView, GameCreateView, GameDeleteView, GameView
+>>>>>>> b9f0b47 (add game_info)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +32,9 @@ urlpatterns = [
     path('game-delete/<int:pk>/', GameDeleteView.as_view(), name='game-delete'),
     path('game-create/', GameCreateView.as_view(), name="game-create"),
     path('game-info/<int:pk>/', GameView.as_view(), name="game-info"),
+<<<<<<< HEAD
     path('game-edit/<int:pk>/', GameEditView.as_view(), name="game-edit"),
+=======
+>>>>>>> b9f0b47 (add game_info)
     path("__debug__/", include("debug_toolbar.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 from django.urls import reverse
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
+=======
+from django.views.generic import CreateView, DeleteView, ListView
+>>>>>>> b9f0b47 (add game_info)
 
 from core.forms import GameCreate
 from core.models import Game
@@ -29,6 +33,7 @@ class GameView(DeleteView):
     context_object_name = 'game'
 
 
+<<<<<<< HEAD
 class GameEditView(UpdateView):
     template_name = 'game_edit.html'
     model = Game
@@ -38,3 +43,5 @@ class GameEditView(UpdateView):
         return reverse('game-info', kwargs={'pk': self.object.pk})
 
 
+=======
+>>>>>>> b9f0b47 (add game_info)
