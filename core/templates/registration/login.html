@@ -1,0 +1,91 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-image: url("{% static 'images/164289-assassins_creed_valhalla-assassins_creed-iskusstvo_assassins_creed_valhalla-ubisoft-playstation_5-3840x2160.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .login {
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.8); {# Полупрозрачный белый фон для контраста #}
+        }
+        .login h2.active, .login h2.nonactive {
+            cursor: pointer;
+        }
+        .login h2.active {
+            color: #000;
+        }
+        .login h2.nonactive {
+            color: #999;
+        }
+        .login input[type="text"], .login input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        .login button.signin {
+            width: 100%;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login hr {
+            margin: 20px 0;
+        }
+        .login a {
+            display: block;
+            text-align: center;
+            margin: 10px 0;
+            color: #000;
+        }
+        .login span {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login">
+        <h2 class="active">Вход</h2>
+        <h2 class="nonactive"><a href="{% url 'register' %}">Войти</a></h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.username.label_tag }} {{ form.username }}
+            {{ form.password.label_tag }} {{ form.password }}
+            <input type="checkbox" id="checkbox-1-1" class="custom-checkbox" />
+            <label for="checkbox-1-1">Запомнить меня</label>
+            <button type="submit" class="signin">Войти</button>
+            <hr>
+            <a href="#">Забыли пароль?</a>
+        </form>
+        <p>Еще нет аккаунта? <a href="{% url 'register' %}">Зарегистрируйтесь здесь</a>.</p>
+    </div>
+</body>
+</html>
+

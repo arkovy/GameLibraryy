@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from core.models import Game  # замените `myapp` на имя вашего приложения
+from games.models import Game  # замените `myapp` на имя вашего приложения
 import random
 
 

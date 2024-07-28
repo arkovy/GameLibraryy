@@ -1,39 +1,28 @@
-from django.urls import reverse
-from django.views.generic import CreateView, DeleteView, ListView, UpdateView
-
-from core.forms import GameCreate
-from core.models import Game
+from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 
 
-class IndexView(ListView):
-    template_name = 'game_list.html'
-    model = Game
-    context_object_name = 'games'
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/register.html', {'form': form})
 
 
-class GameCreateView(CreateView):
-    template_name = 'game_create.html'
-    form_class = GameCreate
-    success_url = '/'
-
-
-class GameDeleteView(DeleteView):
-    template_name = 'game_delete.html'
-    model = Game
-    success_url = '/'
-
-
-class GameView(DeleteView):
-    template_name = 'game_info.html'
-    model = Game
-    context_object_name = 'game'
-
-
-class GameEditView(UpdateView):
-    template_name = 'game_edit.html'
-    model = Game
-    fields = ('name', 'genre', 'developer', 'difficulty', 'icon')
-
-    def get_success_url(self):
-        return reverse('game-info', kwargs={'pk': self.object.pk})
+def user_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'registration/login.html', {'form': form})
 

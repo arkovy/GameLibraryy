@@ -1,36 +1,20 @@
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
 
 
-class TimeAbstractModel(models.Model):
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        abstract = True
-
-
-def image_upload_to(instance, filename):
-    return f'images/{filename}'
-
-
-class Game(TimeAbstractModel):
-
-    DIFFICULTY_EASY = 1
-    DIFFICULTY_MEDIUM = 2
-    DIFFICULTY_HARD = 3
-    DIFFICULTY = (
-        (DIFFICULTY_EASY, 'Easy'),
-        (DIFFICULTY_MEDIUM, 'Medium'),
-        (DIFFICULTY_HARD, 'Hard')
+class CustomUser(AbstractUser):
+    groups = models.ManyToManyField(
+        Group,
+        related_name='customuser_set',
+        blank=True,
+        help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.',
+        verbose_name='groups',
+    )
+    user_permissions = models.ManyToManyField(
+        Permission,
+        related_name='customuser_set',
+        blank=True,
+        help_text='Specific permissions for this user.',
+        verbose_name='user permissions',
     )
 
-    name = models.CharField(max_length=100)
-    genre = models.CharField(max_length=100)
-    developer = models.CharField(max_length=100)
-    icon = models.ImageField(upload_to=image_upload_to, blank=True, null=True)
-    difficulty = models.PositiveSmallIntegerField(choices=DIFFICULTY)
-
-    def __str__(self):
-        return self.name

@@ -1,0 +1,89 @@
+{% load static %}
+
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-image: url("{% static 'images/164289-assassins_creed_valhalla-assassins_creed-iskusstvo_assassins_creed_valhalla-ubisoft-playstation_5-3840x2160.jpg' %}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .register {
+            max-width: 400px;
+            padding: 20px;
+            {background: rgba(255, 255, 255, 0.8);   {#Полупрозрачный белый фон для контраста#}
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .register h2.active, .register h2.nonactive {
+            cursor: pointer;
+        }
+        .register h2.active {
+            color: #000;
+        }
+        .register h2.nonactive {
+            color: #999;
+        }
+        .register input[type="text"], .register input[type="password"], .register input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .register button {
+            width: 100%;
+            padding: 10px;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .register hr {
+            margin: 20px 0;
+        }
+        .register a {
+            display: block;
+            text-align: center;
+            margin: 10px 0;
+            color: #000;
+        }
+        .register span {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="register">
+        <h2 class="nonactive"><a href="{% url 'login' %}">Вход</a></h2>
+        <h2 class="active">Регистрация</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.username.label_tag }} {{ form.username }}
+            {{ form.email.label_tag }} {{ form.email }}
+            {{ form.password1.label_tag }} {{ form.password1 }}
+            {{ form.password2.label_tag }} {{ form.password2 }}
+            <button type="submit">Зарегистрироваться</button>
+            <hr>
+            <p>Уже есть аккаунт? <a href="{% url 'login' %}">Войдите здесь</a>.</p>
+        </form>
+    </div>
+</body>
+</html>
+
