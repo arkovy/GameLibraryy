@@ -10,6 +10,27 @@ class IndexView(ListView):
     model = Game
     context_object_name = 'games'
 
+    def get_queryset(self):
+        search_name = self.request.GET.get('search_name', '')
+        search_genre = self.request.GET.get('search_genre', '')
+        search_difficulty = self.request.GET.get('search_difficulty', '')
+        sort_by = self.request.GET.get('sort_by', 'name')
+        sort_order = self.request.GET.get('sort_order', 'asc')
+
+        queryset = Game.objects.all()
+
+        if search_name:
+            queryset = queryset.filter(name__icontains=search_name)
+        if search_genre:
+            queryset = queryset.filter(genre__icontains=search_genre)
+        if search_difficulty:
+            queryset = queryset.filter(difficulty__icontains=search_difficulty)
+
+        if sort_order == 'desc':
+            sort_by = '-' + sort_by
+
+        return queryset.order_by(sort_by)
+
 
 class GameCreateView(CreateView):
     template_name = 'game_create.html'
