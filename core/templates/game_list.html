@@ -14,12 +14,12 @@
                 <input type="text" id="search_genre" name="search_genre" class="form-control" placeholder="Жанр" value="{{ request.GET.search_genre }}">
             </div>
             <div class="form-group mr-3">
-            <label for="search_difficulty">Сложность:</label>
-            <select id="search_difficulty" name="search_difficulty" class="form-control">
-                <option value="">Выберите сложность</option>
-                <option value="easy" {% if request.GET.search_difficulty == 'easy' %}selected{% endif %}>Легко</option>
-                <option value="medium" {% if request.GET.search_difficulty == 'medium' %}selected{% endif %}>Средне</option>
-                <option value="hard" {% if request.GET.search_difficulty == 'hard' %}selected{% endif %}>Сложно</option>
+                <label for="search_difficulty">Сложность:</label>
+                <select id="search_difficulty" name="search_difficulty" class="form-control">
+                    <option value="">Выберите сложность</option>
+                    <option value="easy" {% if request.GET.search_difficulty == 'easy' %}selected{% endif %}>easy</option>
+                    <option value="medium" {% if request.GET.search_difficulty == 'medium' %}selected{% endif %}>medium</option>
+                    <option value="hard" {% if request.GET.search_difficulty == 'hard' %}selected{% endif %}>hard</option>
                 </select>
             </div>
         </div>
@@ -41,6 +41,9 @@
             </div>
             <div class="col-auto align-self-end">
                 <button type="submit" class="btn btn-primary mb-2">Применить</button>
+            </div>
+            <div class="col-auto align-self-end">
+                <a href="{% url 'index' %}" class="btn btn-secondary mb-2">Сбросить</a>
             </div>
         </div>
     </form>

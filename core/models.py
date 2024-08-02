@@ -16,7 +16,6 @@ def image_upload_to(instance, filename):
 
 
 class Game(TimeAbstractModel):
-
     DIFFICULTY_EASY = 1
     DIFFICULTY_MEDIUM = 2
     DIFFICULTY_HARD = 3
